@@ -1,0 +1,19 @@
+SRC
+   -header：存放基础头文件，如base.h ,ERXA.h,THXA.h
+   -base：存放基础头文件的函数实现，如ERXA.c等，各模块编译时把这些文件加入，模块内无需对这些接口打桩实现了
+   -CC：存放CC组件下各模块的解析代码
+      -extern：存放libCCYY.idb对应的头文件CCYY.h和给的参考头文件；
+                     请根据编译及实际的使用对这些参考头文件修改完善（添加偏移地址/大小/漏掉的数据）
+      -CCXX：CCXX.idb模块的解析代码
+          -Makefile：CCXX模块编译文件
+          -CCXX_extern.h：未在参考头文件中找到的CCXX模块使用到外部数据类型及接口定义
+          -CCXX_extern.c：未在base中实现的CCXX模块使用到的外部接口函数打桩实现
+          -CCXX.h:  CCCXX模块内部头文件
+          -CCXX.c: CCCXX模块解析文件
+          -CCXX_....c：CCCXX模块其他解析文件，如可解析出多个的.c的情况下
+      -libCCYY：libCCYY.idb模块的解析代码
+          -Makefile：libCCYY模块编译文件
+          -CCYY_extern.h：未在参考头文件中找到的libCCYY模块使用到外部数据类型及接口定义
+          -CCYY_extern.c：未在base中实现的libCCYY模块使用到的外部接口函数打桩实现
+          -CCYY.c: libCCYY模块解析文件
+          -CCYY_....c：libCCYY模块其他解析文件，如可解析出多个的.c的情况下
