@@ -1,0 +1,49 @@
+﻿正式任务验收标准
+1. 所有模块相同名称的头文件合并，相同的结构体定义合并，相同的偏移地址变量合并;
+2. 每一个模块（idb文件）翻译的源代码放在单独的目录，目录名与.idb文件同名;
+3. 每一个模块都要编写Makefile并保证编译通过，Makefile文件和编译结果文件保留在源代码目录;
+4. 每一个idb文件（包含每个人的修改和注释）也包含在源代码目录.
+
+以libENxGN.idb和ENTOTC.idb为例，最终提交的代码目录如下：
+======================================================
+SRC
+├─header
+│      base.h
+│      ERXA.h
+│      THXA.h
+│      ...
+├─base
+│      ERXA.c
+│      THXA.c
+│      ...
+└─EN
+    ├─extern
+    │      ENxGN.h           （说明：模块头文件）
+    │      ENTOTC.h          （说明：模块头文件）
+    │      WPxCHUCK_tc.h   （说明：参考头文件）
+    │      ...
+    ├─libENxGN
+    │      ENxGN_extern.h
+    │      ENxGN_extern.c
+    │      ENxGN.c
+    │      Makefile
+    │      libENxGN-赵五.idb
+    │      libENxGN.so    
+    └─ENTOTC
+    │      ENxGN_extern.h
+    │      ENxGN_extern.c
+    │      ENTOTC.c
+    │      Makefile
+    │      ENTOTC-李三.idb
+    │      ENTOTC.exe
+            
+描述：
+1. header目录包含公用的外部依赖数据和函数的头文件，如base.h/ERXA.h/THXA.h
+2. base目录包含公用的外部依赖数据和函数的空实现，header和base会有任务发布方定期发布更新
+3. EN目录是各模块源代码的总目录
+4. EN/extern目录存放各模块解析对应的头文件以及任务发布方发布的参考头文件
+5. ENTOTC_extern.h包含该模块依赖的没有在header及EN/extern中外部函数声明
+6. ENTOTC_extern.c包含该模块依赖的没有在base中实现的外部函数空实现
+7. ENTOTC-作者名称.idb是解析过程添加了注释的idb文件
+8. Makefile是对应模块的编译文件
+9. libENxGN.so 、ENTOTC.exe是在Cygwin下执行make的编译输出文件
